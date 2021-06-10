@@ -5,13 +5,11 @@
     <p><%= image_tag @food.image.url %></p>
   <% end %>
 <p>【コメント】 <%= simple_format h @food.comment %></p>
-<p>
+<p id="food-<%= @food.id %>">
   <% if @food.liked_by?(current_user) %>
-    <%# 「いいね！」済み（クリックすると「いいね」解除） %>
-    <%= link_to "★", food_likes_path(@food), method: :delete %>
+    <%= render "like", food: @food %>
   <% else %>
-    <%# 「いいね」していない（クリックすると「いいね！」にする） %>
-    <%= link_to "☆", food_likes_path(@food), method: :food %>
+    <%= render "dislike", food: @food %>
   <% end %>
 </p>
 <p>
